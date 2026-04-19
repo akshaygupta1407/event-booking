@@ -60,7 +60,7 @@ Once the services are up, the API will be available at:
 http://localhost:8080
 ```
 
-If you prefer testing with Postman, this repository also includes a Postman collection export in the [`curl`](event-booking/curl) file. You can import it directly into Postman and run the requests from there.
+If you prefer testing with Postman, this repository also includes a Postman collection export in [`event-booking-postman-collection.json`](event-booking-postman-collection.json). You can import it directly into Postman and run the requests from there.
 
 ## Environment variables
 
@@ -131,7 +131,7 @@ The tests cover:
 
 ## API testing with Postman
 
-If you want to test the API manually, you can import the included Postman collection from [`curl`](event-booking/curl).
+If you want to test the API manually, you can import the included Postman collection from [`event-booking-postman-collection.json`](event-booking-postman-collection.json).
 
 After importing it:
 
