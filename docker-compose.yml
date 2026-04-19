@@ -1,0 +1,46 @@
+services:
+  api:
+    build: .
+    environment:
+      APP_MODE: api
+      HTTP_PORT: 8080
+      DATABASE_URL: host=postgres user=postgres password=postgres dbname=event_booking port=5432 sslmode=disable
+      REDIS_ADDR: redis:6379
+      JWT_SECRET: super-secret-key
+      JWT_EXPIRY_HOURS: 24
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
+
+  worker:
+    build: .
+    environment:
+      APP_MODE: worker
+      DATABASE_URL: host=postgres user=postgres password=postgres dbname=event_booking port=5432 sslmode=disable
+      REDIS_ADDR: redis:6379
+      JWT_SECRET: super-secret-key
+      JWT_EXPIRY_HOURS: 24
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: event_booking
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
